@@ -5,6 +5,10 @@ plugins {
     id 'kotlin-android-extensions'
 }
 
+task wrapper(type: Wrapper){
+    gradleVersion = '7.2'
+}
+
 android {
     compileSdk 31
 
