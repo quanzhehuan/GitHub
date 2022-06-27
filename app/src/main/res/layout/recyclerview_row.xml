@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- ajout de Layout pour data binding -->
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
@@ -9,43 +10,56 @@
             type="com.example.github.UserData" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageView android:id="@+id/thubmImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+
+        <ImageView
+            android:id="@+id/thubmImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            app:loadImage="@{userListData.avatar_url}"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{userListData.avatar_url}" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="90dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/button_id"
+            app:layout_constraintStart_toEndOf="@+id/thubmImage"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="1dp">
 
-            <TextView android:id="@+id/nameTextView"
+            <TextView
+                android:id="@+id/nameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="18sp"
-                android:textColor="@color/material_dynamic_secondary10"
                 android:layout_margin="40dp"
-                android:textStyle="bold"
-                android:text='@{userListData.login}'/>
-
-            <TextView android:id="@+id/descTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:layout_marginStart="10dp"
-                android:text='@{""}'
-                />
+                android:text='@{userListData.login}'
+                android:textColor="@color/material_dynamic_secondary10"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
-
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_id"
+            android:layout_width="74dp"
+            android:layout_height="36dp"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Detail"
+            android:textColor="@color/design_default_color_secondary_variant"
+            android:textSize="12dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
