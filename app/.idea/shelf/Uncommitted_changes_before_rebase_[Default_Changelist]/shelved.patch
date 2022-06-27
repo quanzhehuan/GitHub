@@ -1,0 +1,192 @@
+Index: src/main/java/com/example/github/RetroInstance.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.github\r\n\r\nimport retrofit2.Retrofit\r\nimport retrofit2.converter.gson.GsonConverterFactory\r\n\r\nclass RetroInstance {\r\n\r\n    companion object{\r\n        val BASE_URL = \"https://api.github.com/search/\"\r\n        fun getRetroInstance():Retrofit {\r\n            return Retrofit.Builder()\r\n                .baseUrl(BASE_URL)\r\n                .addConverterFactory(GsonConverterFactory.create())\r\n                .build()\r\n        }\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/github/RetroInstance.kt b/src/main/java/com/example/github/RetroInstance.kt
+--- a/src/main/java/com/example/github/RetroInstance.kt	(revision bd11e982bd83dfecdf1aed9b71f21fb85dc89ed0)
++++ b/src/main/java/com/example/github/RetroInstance.kt	(date 1656319944683)
+@@ -6,7 +6,7 @@
+ class RetroInstance {
+ 
+     companion object{
+-        val BASE_URL = "https://api.github.com/search/"
++        val BASE_URL = "https://api.github.com/"
+         fun getRetroInstance():Retrofit {
+             return Retrofit.Builder()
+                 .baseUrl(BASE_URL)
+Index: src/main/java/com/example/github/RecyclerList.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.github\r\n\r\ndata class RecyclerList (val items: ArrayList<RecyclerData>)\r\ndata class RecyclerData (val name: String, val description: String, val created_at: String, val owner: Owner)\r\ndata class Owner(val avatar_url: String)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/github/RecyclerList.kt b/src/main/java/com/example/github/RecyclerList.kt
+--- a/src/main/java/com/example/github/RecyclerList.kt	(revision bd11e982bd83dfecdf1aed9b71f21fb85dc89ed0)
++++ b/src/main/java/com/example/github/RecyclerList.kt	(date 1656321073244)
+@@ -1,5 +1,7 @@
+ package com.example.github
+-
++/*
+ data class RecyclerList (val items: ArrayList<RecyclerData>)
+ data class RecyclerData (val name: String, val description: String, val created_at: String, val owner: Owner)
+-data class Owner(val avatar_url: String)
+\ No newline at end of file
++data class Owner(val avatar_url: String)
++
++ */
+\ No newline at end of file
+Index: src/main/java/com/example/github/MainActivityViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.github\r\n\r\nimport androidx.lifecycle.MutableLiveData\r\nimport androidx.lifecycle.ViewModel\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\n\r\nclass MainActivityViewModel : ViewModel(){\r\n    lateinit var recyclerListData: MutableLiveData<RecyclerList>\r\n    lateinit var recyclerViewAdapter: RecyclerViewAdapter\r\n\r\n    init{\r\n        recyclerListData = MutableLiveData()\r\n        recyclerViewAdapter = RecyclerViewAdapter()\r\n    }\r\n\r\n    fun getAdapter() : RecyclerViewAdapter{\r\n        return recyclerViewAdapter\r\n    }\r\n\r\n    fun setAdapterData(data : ArrayList<RecyclerData>){\r\n        recyclerViewAdapter.setDataList(data)\r\n        recyclerViewAdapter.notifyDataSetChanged()\r\n    }\r\n\r\n    fun getRecyclerListDataObserver(): MutableLiveData<RecyclerList>{\r\n        return recyclerListData\r\n    }\r\n\r\n    fun makeAPICall(input : String){\r\n        val retroInstance = RetroInstance.getRetroInstance().create(RetroService::class.java)\r\n        val call = retroInstance.getDataFromAPI(input)\r\n        call.enqueue(object : Callback<RecyclerList>{\r\n            override fun onFailure(call: Call<RecyclerList>, t: Throwable) {\r\n                recyclerListData.postValue(null)\r\n            }\r\n\r\n            override fun onResponse(call: Call<RecyclerList>, response: Response<RecyclerList>) {\r\n                if(response.isSuccessful){\r\n                    recyclerListData.postValue(response.body())\r\n                } else {\r\n                    recyclerListData.postValue(null)\r\n                }\r\n            }\r\n        })\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/github/MainActivityViewModel.kt b/src/main/java/com/example/github/MainActivityViewModel.kt
+--- a/src/main/java/com/example/github/MainActivityViewModel.kt	(revision bd11e982bd83dfecdf1aed9b71f21fb85dc89ed0)
++++ b/src/main/java/com/example/github/MainActivityViewModel.kt	(date 1656321637908)
+@@ -7,40 +7,40 @@
+ import retrofit2.Response
+ 
+ class MainActivityViewModel : ViewModel(){
+-    lateinit var recyclerListData: MutableLiveData<RecyclerList>
+-    lateinit var recyclerViewAdapter: RecyclerViewAdapter
++    lateinit var userListData: MutableLiveData<ArrayList<User>>
++    lateinit var userViewAdapter: UserViewAdapter
+ 
+     init{
+-        recyclerListData = MutableLiveData()
+-        recyclerViewAdapter = RecyclerViewAdapter()
++        userListData = MutableLiveData()
++        userViewAdapter = UserViewAdapter()
+     }
+ 
+-    fun getAdapter() : RecyclerViewAdapter{
+-        return recyclerViewAdapter
++    fun getAdapter() : UserViewAdapter{
++        return userViewAdapter
+     }
+ 
+-    fun setAdapterData(data : ArrayList<RecyclerData>){
+-        recyclerViewAdapter.setDataList(data)
+-        recyclerViewAdapter.notifyDataSetChanged()
++    fun setAdapterData(data : ArrayList<User>){
++        userViewAdapter.setDataList(data)
++        userViewAdapter.notifyDataSetChanged()
+     }
+ 
+-    fun getRecyclerListDataObserver(): MutableLiveData<RecyclerList>{
+-        return recyclerListData
++    fun getRecyclerListDataObserver(): MutableLiveData<ArrayList<User>>{
++        return userListData
+     }
+ 
+     fun makeAPICall(input : String){
+         val retroInstance = RetroInstance.getRetroInstance().create(RetroService::class.java)
+         val call = retroInstance.getDataFromAPI(input)
+-        call.enqueue(object : Callback<RecyclerList>{
+-            override fun onFailure(call: Call<RecyclerList>, t: Throwable) {
+-                recyclerListData.postValue(null)
++        call.enqueue(object : Callback<ArrayList<User>>{
++            override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
++                userListData.postValue(null)
+             }
+ 
+-            override fun onResponse(call: Call<RecyclerList>, response: Response<RecyclerList>) {
++            override fun onResponse(call: Call<ArrayList<User>>, response: Response<ArrayList<User>>) {
+                 if(response.isSuccessful){
+-                    recyclerListData.postValue(response.body())
++                    userListData.postValue(response.body())
+                 } else {
+-                    recyclerListData.postValue(null)
++                    userListData.postValue(null)
+                 }
+             }
+         })
+Index: src/main/java/com/example/github/RetroService.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.github\r\n\r\nimport retrofit2.Call\r\nimport retrofit2.http.GET\r\nimport retrofit2.http.Query\r\n\r\ninterface RetroService {\r\n\r\n    //repositories?q=newyork\r\n    @GET(\"repositories\")\r\n    fun getDataFromAPI(@Query(\"q\")query: String):Call<RecyclerList>\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/github/RetroService.kt b/src/main/java/com/example/github/RetroService.kt
+--- a/src/main/java/com/example/github/RetroService.kt	(revision bd11e982bd83dfecdf1aed9b71f21fb85dc89ed0)
++++ b/src/main/java/com/example/github/RetroService.kt	(date 1656319956794)
+@@ -7,7 +7,7 @@
+ interface RetroService {
+ 
+     //repositories?q=newyork
+-    @GET("repositories")
+-    fun getDataFromAPI(@Query("q")query: String):Call<RecyclerList>
++    @GET("users")
++    fun getDataFromAPI(@Query("q")query: String):Call<User>
+ 
+ }
+\ No newline at end of file
+Index: src/main/java/com/example/github/RecyclerViewAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/github/RecyclerViewAdapter.kt b/src/main/java/com/example/github/UserViewAdapter.kt
+rename from src/main/java/com/example/github/RecyclerViewAdapter.kt
+rename to src/main/java/com/example/github/UserViewAdapter.kt
+--- a/src/main/java/com/example/github/RecyclerViewAdapter.kt	(revision bd11e982bd83dfecdf1aed9b71f21fb85dc89ed0)
++++ b/src/main/java/com/example/github/UserViewAdapter.kt	(date 1656321401910)
+@@ -8,14 +8,14 @@
+ import com.bumptech.glide.Glide
+ import com.example.github.databinding.RecyclerviewRowBinding
+ 
+-class RecyclerViewAdapter: RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
++class UserViewAdapter: RecyclerView.Adapter<UserViewAdapter.MyViewHolder>() {
+     var items = ArrayList<RecyclerData>()
+ 
+     fun setDataList(data :  ArrayList<RecyclerData>) {
+         this.items = data
+     }
+ 
+-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewAdapter.MyViewHolder {
++    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewAdapter.MyViewHolder {
+         val layoutInflater = LayoutInflater.from(parent.context)
+         val binding = com.example.github.databinding.RecyclerviewRowBinding.inflate(layoutInflater)
+         return MyViewHolder(binding)
+Index: src/main/java/com/example/github/User.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/github/User.kt b/src/main/java/com/example/github/User.kt
+new file mode 100644
+--- /dev/null	(date 1656322122246)
++++ b/src/main/java/com/example/github/User.kt	(date 1656322122246)
+@@ -0,0 +1,7 @@
++package com.example.github
++
++data class RecyclerList (val items: ArrayList<RecyclerData>)
++data class RecyclerData (val name: String, val description: String, val created_at: String, val owner: Owner)
++data class Owner(val avatar_url: String)
++
++data class User (val login: String, val id: String, val avatar_url: String)
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"GRADLE\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$/..\" />\r\n            <option value=\"$PROJECT_DIR$\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision bd11e982bd83dfecdf1aed9b71f21fb85dc89ed0)
++++ b/.idea/gradle.xml	(date 1656318351397)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
