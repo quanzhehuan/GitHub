@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.github.databinding.RecyclerviewRowBinding
 
-class RecyclerViewAdapter: RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
-    var items = ArrayList<RecyclerData>()
+class UserViewAdapter: RecyclerView.Adapter<UserViewAdapter.MyViewHolder>() {
+    var items = ArrayList<UserData>()
 
-    fun setDataList(data :  ArrayList<RecyclerData>) {
+    fun setDataList(data :  ArrayList<UserData>) {
         this.items = data
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewAdapter.MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = com.example.github.databinding.RecyclerviewRowBinding.inflate(layoutInflater)
         return MyViewHolder(binding)
@@ -29,8 +29,8 @@ class RecyclerViewAdapter: RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder
 
     class MyViewHolder(val binding: RecyclerviewRowBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: RecyclerData) {
-            binding.recyclerData = data
+        fun bind(data: UserData) {
+            binding.userListData = data
             binding.executePendingBindings()
         }
     }

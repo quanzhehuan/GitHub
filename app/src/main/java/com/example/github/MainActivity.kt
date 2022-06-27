@@ -1,6 +1,5 @@
 package com.example.github
 
-import android.icu.lang.UCharacter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.GONE
@@ -27,8 +26,7 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.setVariable(BR.viewModel, viewModel)
         activityMainBinding.executePendingBindings()
 
-        recyclerView.apply {
-
+        userListView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             val decoration  = DividerItemDecoration(this@MainActivity, VERTICAL)
             addItemDecoration(decoration)
@@ -38,16 +36,16 @@ class MainActivity : AppCompatActivity() {
 
     fun makeApiCall() : MainActivityViewModel{
         val viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-        viewModel.getRecyclerListDataObserver().observe(this, Observer<RecyclerList> {
+        viewModel.getUserListDataObserver().observe(this, Observer<ArrayList<UserData>> {
             progressBar.visibility = GONE
             if(it != null){
                 //MAJ de adapter
-                viewModel.setAdapterData(it.items)
+                viewModel.setAdapterData(it)
             }else{
                 Toast.makeText(this@MainActivity, "Error in fetching data", Toast.LENGTH_LONG).show()
             }
         })
-        viewModel.makeAPICall("newyork")
+        viewModel.makeAPICall()
 
         return viewModel
     }

@@ -7,40 +7,40 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivityViewModel : ViewModel(){
-    lateinit var recyclerListData: MutableLiveData<RecyclerList>
-    lateinit var recyclerViewAdapter: RecyclerViewAdapter
+    lateinit var userListData: MutableLiveData<ArrayList<UserData>>
+    lateinit var userViewAdapter: UserViewAdapter
 
     init{
-        recyclerListData = MutableLiveData()
-        recyclerViewAdapter = RecyclerViewAdapter()
+        userListData = MutableLiveData()
+        userViewAdapter = UserViewAdapter()
     }
 
-    fun getAdapter() : RecyclerViewAdapter{
-        return recyclerViewAdapter
+    fun getAdapter() : UserViewAdapter{
+        return userViewAdapter
     }
 
-    fun setAdapterData(data : ArrayList<RecyclerData>){
-        recyclerViewAdapter.setDataList(data)
-        recyclerViewAdapter.notifyDataSetChanged()
+    fun setAdapterData(data : ArrayList<UserData>){
+        userViewAdapter.setDataList(data)
+        userViewAdapter.notifyDataSetChanged()
     }
 
-    fun getRecyclerListDataObserver(): MutableLiveData<RecyclerList>{
-        return recyclerListData
+    fun getUserListDataObserver(): MutableLiveData<ArrayList<UserData>>{
+        return userListData
     }
 
-    fun makeAPICall(input : String){
+    fun makeAPICall(){
         val retroInstance = RetroInstance.getRetroInstance().create(RetroService::class.java)
-        val call = retroInstance.getDataFromAPI(input)
-        call.enqueue(object : Callback<RecyclerList>{
-            override fun onFailure(call: Call<RecyclerList>, t: Throwable) {
-                recyclerListData.postValue(null)
+        val call = retroInstance.getDataFromAPI()
+        call.enqueue(object : Callback<ArrayList<UserData>>{
+            override fun onFailure(call: Call<ArrayList<UserData>>, t: Throwable) {
+                userListData.postValue(null)
             }
 
-            override fun onResponse(call: Call<RecyclerList>, response: Response<RecyclerList>) {
+            override fun onResponse(call: Call<ArrayList<UserData>>, response: Response<ArrayList<UserData>>) {
                 if(response.isSuccessful){
-                    recyclerListData.postValue(response.body())
+                    userListData.postValue(response.body())
                 } else {
-                    recyclerListData.postValue(null)
+                    userListData.postValue(null)
                 }
             }
         })
