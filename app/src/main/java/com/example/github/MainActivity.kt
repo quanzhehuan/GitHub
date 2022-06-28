@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setupBinding(viewModel : MainActivityViewModel) {
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val activityMainBinding : ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         activityMainBinding.setVariable(BR.viewModel, viewModel)
         activityMainBinding.executePendingBindings()
