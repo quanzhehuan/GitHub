@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GitHub">
         <activity
-            android:name="com.example.github.activity.UserInfoActivity"
+            android:name="com.example.github.UserInfoActivity"
             android:exported="true"/>
             <activity android:name="com.example.github.MainActivity"
                 android:exported="true">

@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
-import com.example.github.activity.UserInfoActivity
 import com.example.github.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
