@@ -11,9 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GitHub">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
+            android:name="com.example.github.activity.UserInfoActivity"
+            android:exported="true"/>
+            <activity android:name="com.example.github.MainActivity"
+                android:exported="true">
+                <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

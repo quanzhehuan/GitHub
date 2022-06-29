@@ -1,6 +1,7 @@
 package com.example.github
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -10,6 +11,15 @@ import com.example.github.databinding.RecyclerviewRowBinding
 
 class UserViewAdapter: RecyclerView.Adapter<UserViewAdapter.MyViewHolder>() {
     var items = ArrayList<UserData>()
+    lateinit var mListener: onItemClickListener
+
+    interface onItemClickListener {
+        fun onItemClick(userData: UserData)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener) {
+        mListener = listener
+    }
 
     fun setDataList(data :  ArrayList<UserData>) {
         this.items = data
@@ -25,6 +35,11 @@ class UserViewAdapter: RecyclerView.Adapter<UserViewAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(items[position])
+        holder.itemView.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                mListener.onItemClick(items[holder.getAdapterPosition()]) // A modifier
+            }
+        })
     }
 
     class MyViewHolder(val binding: RecyclerviewRowBinding): RecyclerView.ViewHolder(binding.root) {

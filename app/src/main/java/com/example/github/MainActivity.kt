@@ -1,5 +1,6 @@
 package com.example.github
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.GONE
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
+import com.example.github.activity.UserInfoActivity
 import com.example.github.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -19,6 +21,14 @@ class MainActivity : AppCompatActivity() {
             //setContentView(R.layout.activity_main)
         val viewModel = makeApiCall()
         setupBinding(viewModel)
+        viewModel.getAdapter().setOnItemClickListener(object : UserViewAdapter.onItemClickListener {
+            override fun onItemClick(userData: UserData) {
+                val intent = Intent(this@MainActivity, UserInfoActivity::class.java)
+                intent.putExtra("login", userData.login)
+                intent.putExtra("avatar_url", userData.avatar_url)
+                startActivity(intent)
+            }
+        })
     }
 
     fun setupBinding(viewModel : MainActivityViewModel) {

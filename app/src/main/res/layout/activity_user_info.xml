@@ -25,7 +25,7 @@ android:background="@color/white">
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/userInfo"
+            android:id="@+id/userLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Make"
@@ -39,7 +39,7 @@ android:background="@color/white">
             android:layout_height="wrap_content"
             android:text=""
             android:layout_marginStart="10dp"
-            app:layout_constraintStart_toEndOf="@id/userInfo"
+            app:layout_constraintStart_toEndOf="@id/userLogin"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginLeft="10dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
