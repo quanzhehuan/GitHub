@@ -10,19 +10,24 @@ import com.bumptech.glide.Glide
 import com.example.github.databinding.RecyclerviewRowBinding
 
 class UserViewAdapter: RecyclerView.Adapter<UserViewAdapter.MyViewHolder>() {
-    var items = ArrayList<UserData>()
-    lateinit var mListener: onItemClickListener
+    var userItems = ArrayList<UserData>()
+    var userRepos = ArrayList<Repo>()
+    lateinit var myListener: onItemClickListener
 
     interface onItemClickListener {
         fun onItemClick(userData: UserData)
     }
 
     fun setOnItemClickListener(listener: onItemClickListener) {
-        mListener = listener
+        myListener = listener
     }
 
-    fun setDataList(data :  ArrayList<UserData>) {
-        this.items = data
+    fun setDataList(data: ArrayList<UserData>) {
+        this.userItems = data
+    }
+
+    fun setRepoList(repo: ArrayList<Repo>){
+        this.userRepos = repo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewAdapter.MyViewHolder {
@@ -31,13 +36,13 @@ class UserViewAdapter: RecyclerView.Adapter<UserViewAdapter.MyViewHolder>() {
         return MyViewHolder(binding)
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = userItems.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(userItems[position])
         holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                mListener.onItemClick(items[holder.getAdapterPosition()]) // A modifier
+                myListener.onItemClick(userItems[holder.getAdapterPosition()])
             }
         })
     }
@@ -53,14 +58,14 @@ class UserViewAdapter: RecyclerView.Adapter<UserViewAdapter.MyViewHolder>() {
     companion object {
         @JvmStatic
         @BindingAdapter("loadImage")
-        fun loadImage(thubmImage: ImageView, url: String) {
-            Glide.with(thubmImage)
+        fun loadImage(userIcon: ImageView, url: String) {
+            Glide.with(userIcon)
                 .load(url)
                 .circleCrop()
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_foreground)
                 .fallback(R.drawable.ic_launcher_foreground)
-                .into(thubmImage)
+                .into(userIcon)
         }
 
     }

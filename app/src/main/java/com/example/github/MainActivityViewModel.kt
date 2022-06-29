@@ -8,10 +8,12 @@ import retrofit2.Response
 
 class MainActivityViewModel : ViewModel(){
     lateinit var userListData: MutableLiveData<ArrayList<UserData>>
+    lateinit var userInfo: MutableLiveData<ArrayList<Repo>>
     lateinit var userViewAdapter: UserViewAdapter
 
     init{
         userListData = MutableLiveData()
+        userInfo = MutableLiveData()
         userViewAdapter = UserViewAdapter()
     }
 
@@ -44,6 +46,11 @@ class MainActivityViewModel : ViewModel(){
                 }
             }
         })
+    }
+
+    fun setAdapterRepo(repo : ArrayList<Repo>) {
+        userViewAdapter.setRepoList(repo)
+        userViewAdapter.notifyDataSetChanged()
     }
 
 }

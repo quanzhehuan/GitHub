@@ -11,4 +11,6 @@ interface RetroService {
     @GET("users")
     fun getDataFromAPI():Call<ArrayList<UserData>>
 
+    @GET("users/{login}/repos")
+    fun getRepoFromAPI():Call<ArrayList<Repo>>
 }
