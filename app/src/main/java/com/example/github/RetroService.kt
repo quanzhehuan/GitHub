@@ -2,6 +2,7 @@ package com.example.github
 
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface RetroService {
 
@@ -12,5 +13,5 @@ interface RetroService {
     fun getDataFromAPI():Call<ArrayList<UserData>>
 
     @GET("users/{login}/repos")
-    fun getRepoFromAPI():Call<ArrayList<Repo>>
+    fun getRepoFromAPI(@Path("login") login: String):Call<ArrayList<Repo>>
 }

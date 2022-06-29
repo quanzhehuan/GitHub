@@ -31,20 +31,74 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAlignment="center"
+                android:layout_marginTop="30dp"
                 android:textSize="20dp"
-                android:text="userLogin"
+                android:text="Login : "
+                android:textColor="@color/material_dynamic_secondary50"
+                app:layout_constraintTop_toBottomOf="@+id/userIcon"
+                app:layout_constraintStart_toStartOf="@id/userIcon"/>
+            <TextView
+                android:id="@+id/userId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:text="Id : "
+                android:textColor="@color/material_dynamic_secondary50"
+                app:layout_constraintTop_toBottomOf="@+id/userIcon"
+                app:layout_constraintStart_toStartOf="@id/userIcon"/>
+            <TextView
+                android:id="@+id/userNodeId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:text="Node Id : "
+                android:textColor="@color/material_dynamic_secondary50"
+                app:layout_constraintTop_toBottomOf="@+id/userIcon"
+                app:layout_constraintStart_toStartOf="@id/userIcon"/>
+            <TextView
+                android:id="@+id/userType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:text="Account type : "
+                android:textColor="@color/material_dynamic_secondary60"
+                app:layout_constraintTop_toBottomOf="@+id/userIcon"
+                app:layout_constraintStart_toStartOf="@id/userIcon"/>
+            <TextView
+                android:id="@+id/userAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:text="Github's admin : "
+                android:textColor="@color/material_dynamic_secondary60"
+                app:layout_constraintTop_toBottomOf="@+id/userIcon"
+                app:layout_constraintStart_toStartOf="@id/userIcon"/>
+            <TextView
+                android:id="@+id/userHtmlUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:text="Github address : "
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@+id/userIcon"
                 app:layout_constraintStart_toStartOf="@id/userIcon"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/userListView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="@id/userLogin"
-                app:layout_constraintStart_toStartOf="@id/userLogin"
-                app:setAdapter='@{viewModel.getAdapter()}' />
+            />
 
         </LinearLayout>
     </layout>

@@ -25,6 +25,11 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, UserInfoActivity::class.java)
                 intent.putExtra("login", userData.login)
                 intent.putExtra("avatar_url", userData.avatar_url)
+                intent.putExtra("id", userData.id)
+                intent.putExtra("node_id", userData.node_id)
+                intent.putExtra("html_url", userData.html_url)
+                intent.putExtra("type", userData.type)
+                intent.putExtra("site_admin", userData.site_admin)
                 startActivity(intent)
             }
         })
