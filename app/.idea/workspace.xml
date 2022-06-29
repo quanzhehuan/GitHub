@@ -12,14 +12,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aec2307e-7893-4981-891e-7fcaf0d2fb2f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/github/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/github/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/github/RetroService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/github/RetroService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/github/UserInfoActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/github/UserInfoActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/github/UserList.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/github/UserList.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_user_info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_user_info.xml" afterDir="false" />
-    </list>
+    <list default="true" id="aec2307e-7893-4981-891e-7fcaf0d2fb2f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
